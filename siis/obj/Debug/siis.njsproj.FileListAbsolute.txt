@@ -1,0 +1,2 @@
+F:\Users\BLUEPEPPER-BMW\Documents\Git\siis\siis\obj\Debug\siis.njsprojResolveAssemblyReference.cache
+F:\Users\BLUEPEPPER-BMW\Documents\Git\siis\siis\bin\Microsoft.NodejsTools.WebRole.dll

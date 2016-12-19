@@ -32,7 +32,7 @@ router.get('/:id', function (req, res, next) {
         }
         else
         {
-            var text = marked(data);
+            // var text = marked(data);
 
             /*
             var where = req.params.id;
@@ -54,7 +54,7 @@ router.get('/:id', function (req, res, next) {
             });
             */
 
-            res.render('notice', { message: text });
+            res.render('notice', { message: data });
         }
     });
 });
@@ -79,8 +79,8 @@ router.get('/', function (req, res, next) {
             console.log(err);
         }
         else {
-            var text = marked(data);
-            res.render('notice', { message: text });
+            // var text = marked(data);
+            res.render('notice', { message: data });
         }
     });
 });
