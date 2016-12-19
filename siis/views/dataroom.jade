@@ -1,0 +1,33 @@
+﻿html
+    head
+        title 자료실
+        | 	  
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        |       
+        | 	  
+        link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+        | 	  
+        link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css')
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        |          
+        script(type='text/javascript', src='https://code.jquery.com/jquery-2.1.1.min.js')
+        |            
+        |       
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js')
+    |    
+    body.container.fill_parent_width
+        main
+            include navbar
+            //- h4 자료실
+            ul.collapsible.popout(data-collapsible='accordion')
+                each obj, i in res
+                    li
+                        .collapsible-header
+                            i.material-icons filter_drama
+                            | #{obj.folder}
+                        |             
+                        .collapsible-body
+                            div.collection
+                                each file in obj.files
+                                    div.collection-item
+                                        a(href='http://183.110.20.93:3000/download?where=' + "#{file}", target='_self') #{file}
