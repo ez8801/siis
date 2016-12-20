@@ -1,24 +1,31 @@
-﻿nav(role='navigation').siis_color
+﻿script(type='text/javascript').
+  $(document).ready(function(){
+    $('.right.hide-on-med-and-down li').click(function() {
+      $(this).siblings('li').removeClass('active');
+      $(this).addClass('active');
+    });
+  });
+nav(role='navigation').siis_color
   .nav-wrapper
     a.brand-logo(href='/') 한양대 산업융학학부
       ul#nav-mobile.right.hide-on-med-and-down
-        li.active
+        li#notice
           a(href='/')
             i.material-icons.right announcement
             | 공지
-        li
+        li#vote
           a(href='/vote')
             i.material-icons.right web
             | 투표
-        li
+        li#calendar
           a(href='/calendar')
             i.material-icons.right av_timer
             | 일정
-        li
+        li#bambooforest
           a(href='/bambooforest')
             i.material-icons.right chat
             | 대나무숲
-        li
+        li#dataroom
           a(href='/dataroom')
             i.material-icons.right system_update_alt
             | 자료실

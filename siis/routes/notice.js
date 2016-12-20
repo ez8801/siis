@@ -5,11 +5,9 @@ var router = express.Router();
 // var md = new markdownit();
 // var escapeHtml = require('escape-html');
 
-var marked = require('marked');
-var showdown = require('showdown');
-var converter = new showdown.Converter();
-
-var index = require('./index');
+// var marked = require('marked');
+// var showdown = require('showdown');
+// var converter = new showdown.Converter();
 
 var path = require('path');
 const fs = require('fs');
@@ -32,8 +30,6 @@ router.get('/:id', function (req, res, next) {
         }
         else
         {
-            // var text = marked(data);
-
             /*
             var where = req.params.id;
             var fileName = where.substring(0, where.length - 3);
@@ -61,26 +57,34 @@ router.get('/:id', function (req, res, next) {
 
 /* GET home page. */
 router.get('/', function (req, res, next) {    
-    if (index.TEMP_DATA)
-    {
-        console.log('got cha!');
-    }
-
+    
     // query / body / params
     var parentDir = path.dirname(module.parent.filename);
     
     // __dirname
     var fianlPath = parentDir + '\\public\\markdown\\' + req.query.where + '.md';
     
-    console.log('/');
-
+	console.log('/');
+	
+	var arrNotice = global.TEMP_DATA['notices'];
+	var find = null;
+	for (var i = 0; i < arrNotice.length; i++) {
+		var eachJSON = arrNotice[i];
+		if (eachJSON['index'] == req.query.where) {
+			find = eachJSON;
+			break;
+		}
+	}
+	
     fs.readFile(fianlPath, 'utf8', function (err, data) {
         if (err) {
             console.log(err);
         }
         else {
-            // var text = marked(data);
-            res.render('notice', { message: data });
+			// var text = marked(data);
+
+			eachJSON['message'] = data;
+            res.render('notice', eachJSON);
         }
     });
 });

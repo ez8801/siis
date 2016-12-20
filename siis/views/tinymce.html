@@ -1,0 +1,23 @@
+﻿<script type="text/javascript">
+    tinymce.init({
+        selector: '#mytextarea',
+        height: 500,
+        menubar: false,
+        plugins: [
+          'advlist autolink lists link image charmap print preview anchor',
+          'searchreplace visualblocks code fullscreen',
+          'insertdatetime media table contextmenu paste code'
+        ],
+        toolbar: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | btn_blockquote',
+        setup: function (editor) {
+        	editor.addButton('btn_blockquote', {
+        		text: 'blockquote',
+        		icon: false,
+        		onclick: function () {
+        			editor.insertContent('&nbsp;<blockquote>test</blockquote>&nbsp;');
+        		}
+        	});
+        },
+        content_css: '//www.tinymce.com/css/codepen.min.css'
+    });
+</script>

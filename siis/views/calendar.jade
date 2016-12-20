@@ -1,6 +1,14 @@
-﻿extends layout
+﻿extends layout_textarea
 
 block content
-    include navbar
-    div#main
-        p test
+  script(type='text/javascript').
+    function onclick_btn_submit() { var content = tinymce.activeEditor.getContent(); document.getElementById('content').value = content; document.getElementById('contentForm').submit(); }
+  include navbar
+  div#main
+    p test
+  textarea#mytextarea
+  form#contentForm(action='/download', method='POST')
+    input#content(type='hidden', name='content')
+    | 
+    a.btn.waves-effect.waves-light(onclick="onclick_btn_submit();") Submit
+      i.material-icons.right send

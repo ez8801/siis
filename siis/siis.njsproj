@@ -39,9 +39,11 @@
     <Content Include="README.md" />
     <Content Include="views\footer.jade" />
     <Content Include="views\index.jade" />
+    <Content Include="views\layout_textarea.jade" />
     <Content Include="views\layout.jade" />
     <Content Include="views\error.jade" />
     <Content Include="views\SiteMap.jade" />
+    <Content Include="views\tinymce.html" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />

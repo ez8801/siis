@@ -7,12 +7,12 @@ block content
       .col.16.s12
         a.breadcrumb.margin_16px(href='/') Home
         a.breadcrumb(href='#!') 공지사항
-  h4 Title
-  p summary
+  h4 #{Title}
+  p #{Date}
   div.chip
     - var i = locals.RandomRange(0, 1);
       img(src=(i % 2 == 0) ? "images/user_male-128.png" : "images/user_male3-128.png")
-      | Author  
+      | #{Author}  
   div.divider
   div.card-panel
     p.flow-text #{message}

@@ -4,8 +4,6 @@ var router = express.Router();
 var path = require('path');
 const fs = require('fs');
 
-var TEMP_DATA = null;
-
 function replaceNewLineChars(value) {
     if (value != null && value != "")
     {
@@ -30,7 +28,7 @@ function rtrim(val) {
 /* GET home page. */
 router.get('/', function (req, res, next) {
 
-    if (TEMP_DATA == null)
+    if (global.TEMP_DATA == null)
     {
         var parentDir = path.dirname(module.parent.filename);
         var finalPath = parentDir + '\\public\\files\\temp.json';
@@ -42,45 +40,25 @@ router.get('/', function (req, res, next) {
             else {
                 var str = replaceNewLineChars(data);
                 str = ltrim(str);
-                str = rtrim(str);
-                TEMP_DATA = JSON.parse(str);
+				str = rtrim(str);
+				global.TEMP_DATA = JSON.parse(str);
+				console.log(global.TEMP_DATA);
 
-                res.render('index', { title: '한양대학교 산업융학학부 15학번', list: TEMP_DATA['notices'] });
+                res.render('index', { title: '한양대학교 산업융학학부 15학번', list: global.TEMP_DATA['notices'] });
             }
         });
     }
     else
     {
-        res.render('index', { title: '한양대학교 산업융학학부 15학번', list: TEMP_DATA['notices'] });
+        res.render('index', { title: '한양대학교 산업융학학부 15학번', list: global.TEMP_DATA['notices'] });
     }
 
     /*
     var finalPath = parentDir + '\\public\\markdown';
     fs.readdir(finalPath, function (err, files) {
-        if (err)
-        {
-            console.log(err);
-            return;
-        }
-        else
-        {
-            res.render('index', { title: '한양대학교 산업융학학부 15학번', list: files });
-        }
+		res.render('index', { title: '한양대학교 산업융학학부 15학번', list: files });
     });
     */
-
-/*
-var _message = '<ul>';
-for (var i = 0; i < files.length; i++)
-{
-_message += '<li><a href="http://127.0.0.1:3000/test/';
-_message += files[i];
-_message += '" target="_self">' + files[i];
-_message += '</a></li>';
-}
-_message += '</ul>'
-*/
-
 });
 
 router.onclick = function () {
