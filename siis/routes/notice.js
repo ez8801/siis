@@ -64,13 +64,15 @@ router.get('/', function (req, res, next) {
     // __dirname
     var fianlPath = parentDir + '\\public\\markdown\\' + req.query.where + '.md';
     
-	console.log('/');
-	
+	console.log('/: ' + req.query.where);
+	console.log(typeof req.query.where);
+
 	var arrNotice = global.TEMP_DATA['notices'];
-	var find = null;
+	var find = {};
+	
 	for (var i = 0; i < arrNotice.length; i++) {
 		var eachJSON = arrNotice[i];
-		if (eachJSON['index'] == req.query.where) {
+		if (eachJSON['Index'] == req.query.where) {
 			find = eachJSON;
 			break;
 		}
@@ -82,9 +84,11 @@ router.get('/', function (req, res, next) {
         }
         else {
 			// var text = marked(data);
+			
+			find['message'] = data;
 
-			eachJSON['message'] = data;
-            res.render('notice', eachJSON);
+			console.log(find);
+            res.render('notice', find);
         }
     });
 });
