@@ -1,31 +1,29 @@
 ﻿extends layout
 
 block content
-    include navbar
-    script(type='text/javascript').
-        $(document).ready(function(){
-            $("#notice").addClass('active');
-        });
-    div.collection
-        each file, i in list
-            if i <= 15
-                div.collection-item
-                    row                        
-                        span.col.chip.s4
-                            img(src=(i % 2 == 0) ? "images/user_male-128.png" : "images/user_male3-128.png") 
-                            | #{file.Author}
-                        span.col.s4
-                            |  #{file.Date} 
-                        span.col.s12
-                            a(href='http://183.110.20.93:3000/notice?where=' + "#{file.Index}", target='_self') #{file.Title}
-                                   
-                    
-        else
-            a(href="#") 공지가 없습니다.
-    ul.pagination.align_center
-        li.active
-            a(href='#!')#siis_color 1
-        li
-            a(href='#!') 2
-        li
-            a(href='#!') 3
+  include navbar
+  script(type='text/javascript').
+    $(document).ready(function(){
+      $("#notice").addClass('active');
+    });
+  div.collection
+    each file, i in list
+      if i <= 15
+        div.collection-item
+          row
+            span.col.chip.s4
+              img(src=(i % 2 == 0) ? "images/user_male-128.png" : "images/user_male3-128.png") 
+              | #{file.Author}
+            span.col.s4
+            |  #{file.Date} 
+            span.col.s12
+              a(href='http://183.110.20.93:3000/notice?where=' + "#{file.Index}", target='_self') #{file.Title}
+    else
+      a(href="#") 공지가 없습니다.
+  ul.pagination.align_center
+    li.active
+      a(href='#!')#siis_color 1
+    li
+      a(href='#!') 2
+    li
+      a(href='#!') 3

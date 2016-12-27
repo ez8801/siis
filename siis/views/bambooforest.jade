@@ -7,11 +7,19 @@ block content
       $("#bambooforest").addClass('active');
     });
   - var test = [ '1', '2', '3', '4', '5' ];
-  each obj in test
+  each obj, i in test
     .card-panel.grey.lighten-5.z-depth-1
       .row.valign-wrapper
-        .col.s1
-          img.circle.responsive-img(src='images/user_male3-128.png', alt='')
-        .col.s11
-          span.black-text
-          | This is a square image. Add the "circle" class to it to make it appear circular.| This is a square image. Add the "circle" class to it to make it appear circular.
+        if (i % 2) == 0
+          .col.s1
+            img.circle.responsive-img(src='images/user_male3-128.png', alt='')
+          .col.s11
+            span.black-text
+            | This is a square image. Add the "circle" class to it to make it appear circular.| This is a square image. Add the "circle" class to it to make it appear circular.
+        else
+          .col.s11
+            span.black-text
+            | This is a square image. Add the "circle" class to it to make it appear circular.| This is a square image. Add the "circle" class to it to make it appear circular.
+          .col.s1
+            img.circle.responsive-img(src='images/user_male3-128.png', alt='')
+            
