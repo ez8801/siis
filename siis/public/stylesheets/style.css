@@ -73,7 +73,6 @@
 
 ul.list-type-none {
 	list-style-type: none;
-	text-align: right;
 }
 .horizontal {
 	display: inline;
@@ -85,6 +84,7 @@ a.menu {
 
 /* align */
 .align_center { text-align: center; }
+.align_right { text-align: right; }
 .vertical_align_middle { vertical-align: middle; }
 
 /* color */
