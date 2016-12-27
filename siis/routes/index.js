@@ -2,7 +2,6 @@
 var router = express.Router();
 
 var path = require('path');
-const fs = require('fs');
 
 function replaceNewLineChars(value) {
     if (value != null && value != "")
@@ -42,8 +41,7 @@ router.get('/', function (req, res, next) {
                 str = ltrim(str);
 				str = rtrim(str);
 				global.TEMP_DATA = JSON.parse(str);
-				console.log(global.TEMP_DATA);
-
+				
                 res.render('index', { title: '한양대학교 산업융학학부 15학번', list: global.TEMP_DATA['notices'] });
             }
         });

@@ -1,14 +1,23 @@
 ﻿script(type='text/javascript').
   $(document).ready(function(){
-    $('.right.hide-on-med-and-down li').click(function() {
+    $('.right.hide-on-med-and-down li').click(function() {      
       $(this).siblings('li').removeClass('active');
       $(this).addClass('active');
     });
   });
+ul.list-type-none
+  li.horizontal.mgr32
+    a.menu(href='http://siis.hanyang.ac.kr/') 학과 홈페이지
+  li.horizontal.mgr32
+    a.menu(href='http://www.hanyang.ac.kr/') HANYANG UNIV.
+  li.horizontal.mgr32
+    a.menu(href='https://portal.hanyang.ac.kr/') HY-in
+  li.horizontal
+    a.menu(href='http://www.weehan.com/') Wee-Han
 nav(role='navigation').siis_color
   .nav-wrapper
-    a.brand-logo(href='/') 한양대 산업융학학부
-      ul#nav-mobile.right.hide-on-med-and-down
+    a.brand-logo.mgl16(href='/') 한양대 산업융학학부
+      ul#nav-mobile.right.hide-on-med-and-down.mgr16
         li#notice
           a(href='/')
             i.material-icons.right announcement

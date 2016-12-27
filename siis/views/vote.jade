@@ -1,6 +1,13 @@
 ﻿extends layout
 
 block content
-    include navbar
-    div#main
-        p test
+  include navbar
+  script(type='text/javascript').
+    $(document).ready(function(){      
+      $("#vote").addClass('active');
+      // $(".container").addClass('overlay');
+      $("#datepicker").pickdate();
+      $("#inputTitle").characterCounter();
+    });
+  div
+    include voteBuilder

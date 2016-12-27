@@ -1,16 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-// var markdownit = require('markdown-it');
-// var md = new markdownit();
-// var escapeHtml = require('escape-html');
-
-// var marked = require('marked');
-// var showdown = require('showdown');
-// var converter = new showdown.Converter();
-
 var path = require('path');
-const fs = require('fs');
 
 // 라우트 없이 할 때에는 /test:where와 같은 형태로...
 router.get('/:id', function (req, res, next) {
@@ -34,15 +25,10 @@ router.get('/:id', function (req, res, next) {
             var where = req.params.id;
             var fileName = where.substring(0, where.length - 3);
             var filePath = parentDir + '\\public\\html\\' + fileName + '.html';
-
-            // var text = converter.makeHtml(data);            
             fs.access(filePath, function (_err, _stat) {
                 if (_err)
                 {
-                    console.log('[ERR] ' + _err);
-
                     fs.appendFile(filePath, text);
-
                     // fs.createWriteStream(filePath);
                 }
                 else
@@ -82,12 +68,11 @@ router.get('/', function (req, res, next) {
         if (err) {
             console.log(err);
         }
-        else {
-			// var text = marked(data);
-			
+        else {			
 			find['message'] = data;
 
 			console.log(find);
+			console.log(typeof data);
             res.render('notice', find);
         }
     });

@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-const fs = require('fs');
 var path = require('path');
 var dateUtils = require('date-utils');
 
@@ -36,8 +35,9 @@ router.post('/', function (req, res, next) {
 				if (__err) {
 					console.log(__err);
 				}
-
-				res.location('/');
+				
+				// location
+				res.redirect('/');
 			});
 			// fs.createWriteStream(filePath);
 		}

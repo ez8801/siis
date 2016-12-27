@@ -1,0 +1,37 @@
+﻿div.row
+  div.col.s12.m6
+    div.card.blue-grey.lighten-5.hoverable
+      div.card-content.black-text
+        p 투표 제목
+        div.row
+          div.card.pdl16.pdr16.pdt2
+            div.input-field			 
+              input#inputTitle(placeholder='제목을 입력하세요', type='text', length='50')              
+        p 항목입력
+        div.row
+          div.card.pdl16.pdr16.pdt2
+            div.input-field
+              input#inputItem0(type='text', placeholder='항목을 입력하세요.')
+            div.input-field
+              input#inputItem1(type='text', placeholder='항목을 입력하세요.')
+            div.input-field
+              input#inputItem2(type='text', placeholder='항목을 입력하세요.')
+        div.pdb4
+          a.btn-floating.btn-medium.waves-effect.waves-light.red.darken-1
+            i.material-icons add
+        label(for="datepicker") 마감시간
+        input.datepicker#datepicker(type="text")
+        p 기타옵션
+        form.mgt8(action="#")
+          p
+            input.filled-in#cbSelectionType(type="checkbox")
+            label.black-text(for="cbSelectionType") 복수선택
+          p
+            input.filled-in#cbAnonymous(type="checkbox")
+            label.black-text(for="cbAnonymous") 익명투표
+          p
+            input.filled-in#cbAddable(type="checkbox")
+            label.black-text(for="cbAddable") 선택항목 추가 허용
+      div.card-action
+        a(href="/") 등록
+        a(href="/") 취소

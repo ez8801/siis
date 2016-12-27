@@ -1,6 +1,6 @@
 ﻿extends layout
 
-block content
+block content  
   include navbar
   nav(role='navigation').siis_color
     .nav-wrapper
@@ -14,8 +14,8 @@ block content
       img(src=(i % 2 == 0) ? "images/user_male-128.png" : "images/user_male3-128.png")
       | #{Author}  
   div.divider
-  div.card-panel
-    p.flow-text #{message}
+  div.card-panel#contentPanel.
+    !{message} 
   span
     a.btn-floating.btn-large.waves-effect.waves-light.red
       i.material-icons thumb_up
@@ -30,5 +30,4 @@ block content
     span 
     | 
     a.btn-floating.btn-large.waves-effect.waves-light.blue
-      i.material-icons thumb_down
-    
+      i.material-icons thumb_down    

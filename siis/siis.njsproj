@@ -44,6 +44,7 @@
     <Content Include="views\error.jade" />
     <Content Include="views\SiteMap.jade" />
     <Content Include="views\tinymce.html" />
+    <Content Include="views\voteBuilder.jade" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />

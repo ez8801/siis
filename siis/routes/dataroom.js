@@ -3,8 +3,6 @@ var router = express.Router();
 
 var path = require('path');
 var async = require('async');
-const fs = require('fs');
-
 
 function loadDirectory(callback)
 {
