@@ -79,7 +79,8 @@ app.locals.RandomRange = function (min, max) {
 };
 
 // '127.0.0.1'
-app.listen(3000, '183.110.20.93', function () {
+//app.listen(3000, '183.110.20.93', function () {
+app.listen(3000, function () {
     console.log('Start Server');
 });
 

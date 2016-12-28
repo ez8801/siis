@@ -1,0 +1,14 @@
+
+# npm modules
+node_modules/
+
+
+# vs tmp, build files
+.vs/
+*/obj/
+*/bin/
+.ntvs_analysis.dat
+*.suo
+
+# vim tmp file
+*.swp
