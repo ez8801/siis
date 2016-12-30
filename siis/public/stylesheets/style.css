@@ -71,6 +71,10 @@
 .mgt48 { margin-top: 48px; }
 .mgt64 { margin-top: 64px; }
 
+/* Screen Range */
+@media only screen and (min-width: 601px){.right-on-med-and-up{text-align: right }}
+@media only screen and (max-width: 992px){.center-on-med-and-down{text-align: center }}
+
 ul.list-type-none {
 	list-style-type: none;
 }
