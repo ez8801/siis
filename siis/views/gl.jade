@@ -1,0 +1,36 @@
+﻿doctype html
+html
+  head    
+    title WebGL Demo
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css')
+    link(rel='stylesheet', href='/stylesheets/webgl.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='https://code.jquery.com/jquery-2.1.1.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js')
+    script(src='scripts/sylvester.js')
+    script(src='scripts/glUtils.js')
+    script(src='scripts/webgl.js')
+    script#shader-fs(type="x-shader/x-fragment").
+      varying lowp vec4 vColor;
+      void main(void) {
+        // gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+        gl_FragColor = vColor;
+      }
+    script#shader-vs(type="x-shader/x-vertex").
+      attribute vec3 aVertexPosition;
+      attribute vec4 aVertexColor;
+      uniform mat4 uMVMatrix;
+      uniform mat4 uPMatrix;
+      
+      varying lowp vec4 vColor;
+    
+      void main(void) {
+        gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+        vColor = aVertexColor;
+      }
+  body(onload="start()").container
+    include navbar
+    canvas#glcanvas.align_center(width="640", height="480")
+    include footer
