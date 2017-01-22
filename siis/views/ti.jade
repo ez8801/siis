@@ -1,0 +1,40 @@
+﻿extends layout
+
+block content
+    include navbar
+    table.striped.highlight.pd8
+        thead
+            tr
+                th(data-field="date")거래일시
+                th(data-field="contents")기재내용
+                th(data-field="")찾으신금액(원)
+                th(data-field="")맡기신금액(원)
+                th(data-field="")거래후잔액(원)
+        tbody
+            tr
+                td 2017-01-22
+                td 테스트
+                td 0원
+                td 1,000원
+                td 1,000원
+            tr
+                td 2017-01-23
+                td 테스트 2
+                td 1,000원
+                td 0원
+                td 0원
+             tr
+                td 2017-01-22
+                td 테스트
+                td 0원
+                td 1,000원
+                td 1,000원
+            tr
+                td 2017-01-23
+                td 테스트 2
+                td 1,000원
+                td 0원
+                td 0원
+
+    div.video-container
+        iframe(width="853", heigth="480", src="//www.youtube.com/embed/Q8TXgCzxEnw?rel=0", frameborder="0", allowfullscreen)

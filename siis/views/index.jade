@@ -17,7 +17,7 @@ block content
             span.col.s4
             |  #{file.Date} 
             span.col.s12
-              a(href='http://183.110.20.93:3000/notice?where=' + "#{file.Index}", target='_self') #{file.Title}
+              a(href='/notice?where=' + "#{file.Index}", target='_self') #{file.Title}
     else
       a(href="#") 공지가 없습니다.
   ul.pagination.align_center
@@ -27,3 +27,5 @@ block content
       a(href='#!') 2
     li
       a(href='#!') 3
+  a.waves-effect.waves-light.btn.siis_color(href='/write') 글쓰기
+    i.material-icons.left mode_edit

@@ -9,18 +9,19 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
-if (cluster.isMaster) {
-	for (var i = 0; i < numCPUs; i++) {
+if (cluster.ismaster) {
+
+    for (var i = 0; i < numcpus; i++) {
 		cluster.fork();
 	}
-	
+
 	cluster.on('online', function (worker) {
 		console.log('worker %d, online...'
 			, worker.process.pid);
 	});
 
 	cluster.on('listening', function (worker, address) {
-		console.log("A worker is now connected to " + address.address + ":" + address.port);
+		console.log("a worker is now connected to " + address.address + ":" + address.port);
 	});
 
 	cluster.on('exit', function (worker, code, signal) {
@@ -28,10 +29,10 @@ if (cluster.isMaster) {
 			, worker.process.pid
 			, signal || code);
 
-		cluster.fork();
-	});
-}
-else {
+		// cluster.fork();
+    });
+
+} else {
 
 	fs = require('fs');
 	
@@ -71,7 +72,10 @@ else {
 	app.use('/dataroom', require('./routes/dataroom'));
 	app.use('/download', require('./routes/download'));
 	app.use('/bambooforest', require('./routes/bambooforest'));
-	app.use('/vote', require('./routes/vote'));
+    app.use('/vote', require('./routes/vote'));
+    app.use('/gl', require('./routes/gl'));
+    app.use('/ti', require('./routes/ti'));
+    app.use('/write', require('./routes/write'));
 	
 	// catch 404 and forward to error handler
 	app.use(function (req, res, next) {
@@ -91,13 +95,34 @@ else {
 		res.render('error');
 	});
 	
+    // set local function
 	app.locals.RandomRange = function (min, max) {
 		return Math.floor((Math.random() * max) + min);
-	};
+    };
+
+    /**
+    * Normalize a port into a number, string, or false.
+    */
+    app.locals.NormalizePort = function (val) {
+        var port = process.env.PORT || val; 
+        port = parseInt(val, 10);
+
+        if (isNaN(port)) {
+            // named pipe
+            return val;
+        }
+
+        if (port >= 0) {
+            // port number
+            return port;
+        }
+
+        return false;
+    };
 	
 	// '127.0.0.1' / '183.110.20.93'
-	app.listen(3000, function () {		
-		console.log('Start Server: ' + cluster.worker.id);
+    app.listen(80, function () {		
+		// console.log('Start Server: ' + cluster.worker.id);
 	});
 	
 	// module.exports = app;

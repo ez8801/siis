@@ -17,4 +17,4 @@ block content
           div.collection
             each file in obj.files
               div.collection-item
-                a(href='http://183.110.20.93:3000/download?where=' + "#{file}", target='_self') #{file}
+                a(href='/download?where=' + "#{file}", target='_self') #{file}

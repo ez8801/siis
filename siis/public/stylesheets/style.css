@@ -34,6 +34,15 @@
 .pdt48 { padding-top: 48px; }
 .pdt64 { padding-top: 64px; }
 
+/* padding */
+.pd2 { padding: 2px; }
+.pd4 { padding: 4px; }
+.pd8 { padding: 8px; }
+.pd16 { padding: 16px; }
+.pd32 { padding: 32px; }
+.pd48 { padding: 48px; }
+.pd64 { padding: 64px; }
+
 
 /* margin-right */
 .mgr2 { margin-right: 2px; }
@@ -70,6 +79,16 @@
 .mgt32 { margin-top: 32px; }
 .mgt48 { margin-top: 48px; }
 .mgt64 { margin-top: 64px; }
+
+/* margin */
+.mg2 { margin-top: 2px; }
+.mg4 { margin-top: 4px; }
+.mg8 { margin-top: 8px; }
+.mg16 { margin-top: 16px; }
+.mg32 { margin-top: 32px; }
+.mg48 { margin-top: 48px; }
+.mg64 { margin-top: 64px; }
+
 
 /* Screen Range */
 @media only screen and (min-width: 601px){.right-on-med-and-up{text-align: right }}
@@ -128,6 +147,11 @@ a.menu {
     background-color:#fff;
     opacity:1;
     z-index:1002;
+}
+
+.calendar table tbody td {
+    min-height: 81px;
+    height: 81px;
 }
 
 body {

@@ -1,0 +1,19 @@
+﻿extends layout_textarea
+
+block content
+  script(type='text/javascript').
+    function onclick_btn_submit() { var content = tinymce.activeEditor.getContent(); document.getElementById('content').value = content; document.getElementById('contentForm').submit(); }
+  include navbar
+  script(type='text/javascript').
+    $(document).ready(function(){
+      $("#calendar").addClass('active');
+    });
+  div
+  .input-field.col.s6
+    input#title.validate(placeholder='Title', type='text', length="50")
+  textarea#mytextarea
+  form#contentForm(action='/download', method='POST')
+    input#content(type='hidden', name='content')
+    | 
+    a.btn.tooltipped.waves-effect.waves-light(onclick="onclick_btn_submit();", data-position="bottom", data-delay="350", data-tooltip="submit") Submit
+      i.material-icons.right send
