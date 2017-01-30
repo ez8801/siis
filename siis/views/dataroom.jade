@@ -17,4 +17,4 @@ block content
           div.collection
             each file in obj.files
               div.collection-item
-                a(href='/download?where=' + "#{file}", target='_self') #{file}
+                a(href='/download?where=' + "#{file.path}", target='_self') #{file.name}

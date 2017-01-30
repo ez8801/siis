@@ -9,6 +9,8 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
+const numberOfRowsInPage = 20;
+
 if (cluster.ismaster) {
 
     for (var i = 0; i < numcpus; i++) {
@@ -119,6 +121,9 @@ if (cluster.ismaster) {
 
         return false;
     };
+
+    app.locals.numberOfRowsInPage = numberOfRowsInPage;
+    app.locals.dataRoomPath = './private / dataroom /';
 	
 	// '127.0.0.1' / '183.110.20.93'
     app.listen(80, function () {		

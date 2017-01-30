@@ -8,7 +8,7 @@ block content
     });
   div.collection
     each file, i in list
-      if i <= 10
+      if i <= numberOfRowsInPage
         div.collection-item
           row
             span.col.chip.s4
@@ -21,11 +21,13 @@ block content
     else
       a(href="#") 공지가 없습니다.
   ul.pagination.align_center
-    li.active
-      a(href='#!')#siis_color 1
-    li
-      a(href='#!') 2
-    li
-      a(href='#!') 3
+    - for (var i = 1; i <= numberOfPages; i++) {    
+      if i == page
+        li.active
+          a(href='/?page=' + i)#siis_color #{i}
+      else
+        li
+          a(href='/?page=' + i) #{i}
+    - }
   a.waves-effect.waves-light.btn.siis_color(href='/write') 글쓰기
     i.material-icons.left mode_edit

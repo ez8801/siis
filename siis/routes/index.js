@@ -24,8 +24,18 @@ function rtrim(val) {
     return val.replace(/\s*$/, "");
 };
 
+const numberOfRowsInPage = 20;
+
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get('/', function (req, res, next) {    
+    var page = 1;
+    page = req.query.page;
+    if (page == undefined) {
+        console.log('page was undefined');
+        page = 1;
+    }
+
+    console.log('/, ' + page);
 
     if (global.TEMP_DATA == null)
     {
@@ -42,13 +52,34 @@ router.get('/', function (req, res, next) {
 				str = rtrim(str);
 				global.TEMP_DATA = JSON.parse(str);
 				
-                res.render('index', { title: '한양대학교 산업융학학부 15학번', list: global.TEMP_DATA['notices'] });
+                var notices = global.TEMP_DATA['notices'];
+                var numberOfPages = Math.ceil(notices.length / 20);
+                notices = notices.slice((page - 1) * numberOfRowsInPage, page * numberOfRowsInPage);
+
+                console.log(numberOfPages);
+                res.render('index'
+                    , {
+                        title: '한양대학교 산업융학학부 15학번'
+                        , list: notices
+                        , page: page
+                        , numberOfPages: numberOfPages
+                    });
             }
         });
     }
     else
     {
-        res.render('index', { title: '한양대학교 산업융학학부 15학번', list: global.TEMP_DATA['notices'] });
+        var notices = global.TEMP_DATA['notices'];
+        var numberOfPages = Math.ceil(notices.length / 20);
+        notices = notices.slice((page - 1) * numberOfRowsInPage, page * numberOfRowsInPage);
+
+        console.log(numberOfPages);
+        res.render('index', {
+            title: '한양대학교 산업융학학부 15학번'
+            , list: notices
+            , page: page
+            , numberOfPages: numberOfPages
+        });
     }
 
     /*

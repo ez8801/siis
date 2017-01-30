@@ -4,13 +4,15 @@ var router = express.Router();
 var path = require('path');
 var async = require('async');
 
+const folderPath = './private/dataroom/';
+
 function loadDirectory(callback)
 {
     // Project Folder
     // var parentDir = path.dirname(module.parent.filename);    
     // var finalPath = parentDir + '\\public\\';
 
-    fs.readdir('./public', function (err, files)
+    fs.readdir(folderPath, function (err, files)
     {
         if (err)
         {
@@ -20,7 +22,7 @@ function loadDirectory(callback)
         {
             for (var i = 0; i < files.length; i++)
             {
-                files[i] = './public/' + files[i];
+                files[i] = folderPath + files[i];
                 // files[i] = finalPath + files[i];
             }
 
@@ -37,15 +39,15 @@ function IsNullOrEmpty(l)
     return false;
 }
 
-function loadFileEachDirectory(files, callback)
+function loadFileEachDirectory(folders, callback)
 {
-    if (IsNullOrEmpty(files))
+    if (IsNullOrEmpty(folders))
     {
         callback('dataroom::loadFileEachDirectory(), ArgumentNullException');
         return;
     }
 
-    async.map(files, fs.readdir, function (err, results)
+    async.map(folders, fs.readdir, function (err, results)
     {
         if (err)
             console.log('[ERR] dataroom::loadFileEachDirectory(files, callback), ' + err);
@@ -59,7 +61,7 @@ function loadFileEachDirectory(files, callback)
             
             var res = [];
 
-            for (var i = 0; i < files.length; i++)
+            for (var i = 0; i < folders.length; i++)
             {
                 if (IsNullOrEmpty(results[i]))
                     continue;
@@ -70,11 +72,14 @@ function loadFileEachDirectory(files, callback)
                 {
                     if (IsNullOrEmpty(results[i][j]))
                         continue;
-
-                    arr.push(files[i] + '/' + results[i][j]);
+                    
+                    var file = {};
+                    file['path'] = folders[i] + '/' + results[i][j];
+                    file['name'] = results[i][j];
+                    arr.push(file);
                 }
 
-                obj['folder'] = files[i];
+                obj['folder'] = folders[i];
                 obj['files'] = arr;
 
                 res.push(obj);
