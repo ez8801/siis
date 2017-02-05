@@ -1,0 +1,18 @@
+# Dependency directories
+node_modules/
+
+# Typescript v1 declaration files
+typings/
+
+# vs tmp, build files
+.vs/
+*/obj/
+*/bin/
+.ntvs_analysis.dat
+*.suo
+
+# vim tmp file
+*.swp
+
+# dummy file
+public/html/
