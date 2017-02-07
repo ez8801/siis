@@ -1,19 +1,29 @@
 ﻿extends layout_textarea
 
 block content
-  script(type='text/javascript').
-    function onclick_btn_submit() { var content = tinymce.activeEditor.getContent(); document.getElementById('content').value = content; document.getElementById('contentForm').submit(); }
-  include navbar
-  script(type='text/javascript').
-    $(document).ready(function(){
-      $("#calendar").addClass('active');
-    });
-  div
-  .input-field.col.s6
-    input#title.validate(placeholder='Title', type='text', length="50")
-  textarea#mytextarea
-  form#contentForm(action='/download', method='POST')
+  script(src='scripts/write.js')
+  form#contentForm(action='/write', method='POST')
+    input#title.validate(placeholder='Title', type='text', data-length="50", name='title')
+    ul.collapsible(data-collapsible='expandable')
+      li
+        .collapsible-header.transparent
+          i.material-icons label_outline
+          | 해시태그
+        .collapsible-body.transparent.pdh16
+          div.chips.chips-initial.chips-placeholder(data-index='0', data-initalized='true')
+            input.input#tags(placeholder)
+      li
+        .collapsible-header
+          i.material-icons class
+          | 첨부파일
+        .collapsible-body
+          .file-field.input-field
+            .btn.right
+              span File
+              input#test(type="file")
+            .file-path-wrapper
+              input.file-path.validate(type='text', placeholder='Upload one or more files', name='files')
+    textarea#mytextarea    
     input#content(type='hidden', name='content')
-    | 
-    a.btn.tooltipped.waves-effect.waves-light(onclick="onclick_btn_submit();", data-position="bottom", data-delay="350", data-tooltip="submit") Submit
+    a.siis.btn.tooltipped(onclick="onclick_btn_submit();", data-position="bottom", data-delay="350", data-tooltip="submit") 확인
       i.material-icons.right send

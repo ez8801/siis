@@ -67,8 +67,10 @@ if (cluster.ismaster) {
 	app.use(cookieParser());
 	app.use(express.static(path.join(__dirname, 'public')));
 	
-	app.use('/', require('./routes/index'));
-	app.use('/users', require('./routes/users'));
+    app.use('/', require('./routes/gate'));
+    app.use('/index', require('./routes/index'));
+    app.use('/users', require('./routes/users'));
+    app.use('/gate', require('./routes/gate'));
 	app.use('/notice', require('./routes/notice'));
 	app.use('/calendar', require('./routes/calendar'));
 	app.use('/dataroom', require('./routes/dataroom'));
@@ -121,13 +123,13 @@ if (cluster.ismaster) {
 
         return false;
     };
-
+    
     app.locals.numberOfRowsInPage = numberOfRowsInPage;
     app.locals.dataRoomPath = './private / dataroom /';
 	
 	// '127.0.0.1' / '183.110.20.93'
     app.listen(80, function () {		
-		// console.log('Start Server: ' + cluster.worker.id);
+	    // console.log('Start Server: ' + cluster.worker.id);
 	});
 	
 	// module.exports = app;

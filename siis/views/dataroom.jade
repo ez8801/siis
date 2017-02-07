@@ -1,12 +1,10 @@
 ﻿extends layout
 
 block content
-  include navbar
   script(type='text/javascript').
     $(document).ready(function(){
       $("#dataroom").addClass('active');
     });
-  //- h4 자료실
   ul.collapsible.popout(data-collapsible='accordion')
     each obj, i in res
       li

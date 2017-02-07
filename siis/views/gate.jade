@@ -1,0 +1,28 @@
+﻿doctype html
+html
+  head
+    title= title		
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='https://code.jquery.com/jquery-2.1.1.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js')
+  body
+    include navbar
+    main
+      script(src='scripts/gate.js')
+      .parallax-container
+        .parallax
+          img(src="images/parallax/93f4dae04356a8b.jpg")  
+      .section.white
+        .row.container
+          h4.header 초대합니다
+          p.grey-text.text-darken-3.lighten-3 김소리학우가 결혼을 한다고 합니다 !! 
+          p.grey-text.text-darken-3.lighten-3 2017.02.11. 14:00회기역 웨딩헤너스 7층 씨엘로홀 !!
+        .row.container
+          a(href='http://www.mgcard.net/mcard/?_mc=1483282136') 본문
+      .parallax-container
+        .parallax
+          img(src="images/parallax/224eb2be00966c7.jpg")  
+    include footer

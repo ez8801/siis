@@ -1,8 +1,8 @@
 # Dependency directories
-node_modules/
+siis/node_modules/
 
 # Typescript v1 declaration files
-typings/
+siis/typings/
 
 # vs tmp, build files
 .vs/
@@ -10,9 +10,14 @@ typings/
 */bin/
 .ntvs_analysis.dat
 *.suo
+*.sdf
+*.njsproj
 
 # vim tmp file
 *.swp
 
 # dummy file
-public/html/
+siis/public/html/
+
+# data file
+siis/private/dataroom/

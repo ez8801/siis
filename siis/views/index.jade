@@ -1,7 +1,6 @@
 ﻿extends layout
 
-block content
-  include navbar
+block content  
   script(type='text/javascript').
     $(document).ready(function(){
       $("#notice").addClass('active');
@@ -15,19 +14,19 @@ block content
               img(src=(i % 2 == 0) ? "images/user_male-128.png" : "images/user_male3-128.png") 
               | #{file.Author}
             span.col.s4
-            |  #{file.Date} 
+            span.pdh8 #{file.CreatedAt}
             span.col.s12
-              a(href='/notice?where=' + "#{file.Index}", target='_self') #{file.Title}
+              a(href='/notice?where=' + "#{file.Idx}", target='_self') #{file.Title}
     else
       a(href="#") 공지가 없습니다.
   ul.pagination.align_center
     - for (var i = 1; i <= numberOfPages; i++) {    
       if i == page
         li.active
-          a(href='/?page=' + i)#siis_color #{i}
+          a(href='/index?page=' + i)#siis_color #{i}
       else
         li
-          a(href='/?page=' + i) #{i}
+          a(href='/index?page=' + i) #{i}
     - }
-  a.waves-effect.waves-light.btn.siis_color(href='/write') 글쓰기
+  a.siis.btn(href='/write') 글쓰기
     i.material-icons.left mode_edit

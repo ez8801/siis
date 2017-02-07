@@ -16,6 +16,15 @@
 .pdl48 { padding-left: 48px; }
 .pdl64 { padding-left: 64px; }
 
+/* padding-horizontal */
+.pdh2 { padding-left: 2px; padding-right: 2px; }
+.pdh4 { padding-left: 4px; padding-right: 4px; }
+.pdh8 { padding-left: 8px; padding-right: 8px; }
+.pdh16 { padding-left: 16px; padding-right: 16px; }
+.pdh32 { padding-left: 32px; padding-right: 32px; }
+.pdh48 { padding-left: 48px; padding-right: 48px; }
+.pdh64 { padding-left: 64px; padding-right: 64px; }
+
 /* padding-bottom */
 .pdb2 {	padding-bottom: 2px; }
 .pdb4 { padding-bottom: 4px; }
@@ -94,7 +103,14 @@
 @media only screen and (min-width: 601px){.right-on-med-and-up{text-align: right }}
 @media only screen and (max-width: 992px){.center-on-med-and-down{text-align: center }}
 
+.description {
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 ul.list-type-none {
+    list-style: none;
 	list-style-type: none;
 }
 .horizontal {
@@ -108,11 +124,21 @@ a.menu {
 /* align */
 .align_center { text-align: center; }
 .align_right { text-align: right; }
+.align_left { text-align: left; }
 .vertical_align_middle { vertical-align: middle; }
 
 /* color */
-#siis_color { background-color: #2F4D73; }
-.siis_color { background-color: #2F4D73; }
+#siis_color { background-color: #2F4D73 !important; }
+.siis_color { background-color: #2F4D73 !important; }
+
+.siis-text {
+    color: #2F4D73 !important;
+}
+
+.siis.btn {
+    color: #ffffff !important;
+    background-color: #2F4D73 !important;
+}
 
 /* size */
 .fill_parent_width { width: 100%; }

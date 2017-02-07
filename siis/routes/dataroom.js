@@ -4,6 +4,8 @@ var router = express.Router();
 var path = require('path');
 var async = require('async');
 
+var EZCrypto = require('./../private/scripts/EZCrypto');
+
 const folderPath = './private/dataroom/';
 
 function loadDirectory(callback)
@@ -74,12 +76,15 @@ function loadFileEachDirectory(folders, callback)
                         continue;
                     
                     var file = {};
-                    file['path'] = folders[i] + '/' + results[i][j];
+                    // file['path'] = folders[i] + '/' + results[i][j];
+                    file['path'] = EZCrypto.encrypt(folders[i] + '/' + results[i][j]);
+                    // console.log(file['path']);
+
                     file['name'] = results[i][j];
                     arr.push(file);
                 }
 
-                obj['folder'] = folders[i];
+                obj['folder'] = folders[i].replace(folderPath, '');
                 obj['files'] = arr;
 
                 res.push(obj);
