@@ -2,13 +2,15 @@
 var router = express.Router();
 
 var path = require('path');
-var EZString = require('./../private/scripts/EZString');
+var EZString = require('../scripts/StringEx');
+var EZDB = require('../scripts/EZDB');
 var mysql = require('mysql');
 var async = require('async');
 
 const numberOfRowsInPage = 20;
 
 // Deprecated
+/*
 function insert(notices) {
     async.waterfall([
         function (callback) {
@@ -68,6 +70,7 @@ function insert(notices) {
         }
     });
 }
+*/
 
 function format(val) {
     var date = new Date(val);
@@ -106,6 +109,10 @@ function selectData(connection, callback) {
     connection.query(query, onFinishQuery);
 }
 
+function releaseConnection(connection, callback) {
+
+}
+
 /* GET home page. */
 router.get('/', function (req, res, next) {    
     var page = 1;
@@ -114,13 +121,10 @@ router.get('/', function (req, res, next) {
         page = 1;
     }
 
-    async.waterfall([
-        createConnection
-        , waitForConnect
-        , selectData
-    ], function (err, results) {
+    var sql = 'select Idx, CreatedAt, Title, Author from board order by Idx desc limit 1000';
+    EZDB.query(sql, function (err, results) {
         if (err) console.log('error: ' + err);
-        else {            
+        else {
             var notices = results;
             var numberOfPages = Math.ceil(notices.length / 20);
             notices = notices.slice((page - 1) * numberOfRowsInPage, page * numberOfRowsInPage);
@@ -137,6 +141,14 @@ router.get('/', function (req, res, next) {
             });
         }
     });
+
+    //async.waterfall([
+    //    createConnection
+    //    , waitForConnect
+    //    , selectData
+    //], function (err, results) {
+        
+    //});
     
     /*
     if (global.TEMP_DATA == null)

@@ -1,18 +1,20 @@
 ﻿extends layout
 
 block content  
-  h4 #{Title}  
-  ul.list-type-none
-    li.horizontal
-      div.chip
-        - var i = locals.RandomRange(0, 2);
-        img(src=(i % 2 == 0) ? "images/user_male-128.png" : "images/user_male3-128.png")
-        | #{Author}      
-    li.horizontal
-      | #{CreatedAt}
-  div.divider
-  div.card-panel#contentPanel.
-    !{Contents} 
+
+  div.card-panel#contentPanel
+    h4 #{Title}  
+    ul.list-type-none
+      li.horizontal
+        div.chip
+          - var i = locals.RandomRange(0, 2);
+          img(src=(i % 2 == 0) ? "images/user_male-128.png" : "images/user_male3-128.png")
+          | #{Author}      
+      li.horizontal
+        | #{CreatedAt}
+    div.divider
+    h3
+    | !{Contents} 
   span
     a.btn-floating.btn-large.waves-effect.waves-light.red
       i.material-icons thumb_up

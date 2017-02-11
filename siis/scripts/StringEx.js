@@ -1,5 +1,5 @@
 //
-//  EZString.js
+//  StringEx.js
 //
 //  2013.04.11  /  Minwoo Baek / usd122@naver.com
 //

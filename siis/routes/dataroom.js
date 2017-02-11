@@ -4,7 +4,7 @@ var router = express.Router();
 var path = require('path');
 var async = require('async');
 
-var EZCrypto = require('./../private/scripts/EZCrypto');
+var EZCrypto = require('./../scripts/EZCrypto');
 
 const folderPath = './private/dataroom/';
 

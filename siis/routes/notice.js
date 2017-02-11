@@ -4,7 +4,7 @@ var router = express.Router();
 var path = require('path');
 var mysql = require('mysql');
 var async = require('async');
-var EZString = require('./../private/scripts/EZString');
+var EZString = require('../scripts/StringEx');
 
 // 라우트 없이 할 때에는 /test:where와 같은 형태로...
 //router.get('/:id', function (req, res, next) {    

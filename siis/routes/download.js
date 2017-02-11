@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var EZCrypto = require('./../private/scripts/EZCrypto');
+var EZCrypto = require('./../scripts/EZCrypto');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

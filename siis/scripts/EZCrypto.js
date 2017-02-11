@@ -29,7 +29,7 @@ util.inherits(EZCrypto, events);
 
 
 EZCrypto.encrypt = function (text) {        
-    var cipher = crypto.createCipher('aes-256-cbc', cryptkey);
+    var cipher = crypto.createCipher(algorithm, cryptkey);
     var crypted = cipher.update(text, 'utf8', 'hex');
     crypted += cipher.final('hex');
     return crypted;
