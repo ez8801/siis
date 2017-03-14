@@ -43,6 +43,15 @@
 .pdt48 { padding-top: 48px; }
 .pdt64 { padding-top: 64px; }
 
+/* padding-horizontal */
+.pdv2 { padding-bottom: 2px; padding-top: 2px; }
+.pdv4 { padding-bottom: 4px; padding-top: 4px; }
+.pdv8 { padding-bottom: 8px; padding-top: 8px; }
+.pdv16 { padding-bottom: 16px; padding-top: 16px; }
+.pdv32 { padding-bottom: 32px; padding-top: 32px; }
+.pdv48 { padding-bottom: 48px; padding-top: 48px; }
+.pdv64 { padding-bottom: 64px; padding-top: 64px; }
+
 /* padding */
 .pd2 { padding: 2px; }
 .pd4 { padding: 4px; }
@@ -71,6 +80,15 @@
 .mgl48 { margin-left: 48px; }
 .mgl64 { margin-left: 64px; }
 
+/* margin-horizontal */
+.mgh2 { margin-left: 2px; margin-right: 2px; }
+.mgh4 { margin-left: 4px; margin-right: 4px; }
+.mgh8 { margin-left: 8px; margin-right: 8px; }
+.mgh16 { margin-left: 16px; margin-right: 16px; }
+.mgh32 { margin-left: 32px; margin-right: 32px; }
+.mgh48 { margin-left: 48px; margin-right: 48px; }
+.mgh64 { margin-left: 64px; margin-right: 64px; }
+
 /* margin-bottom */
 .mgb2 { margin-bottom: 2px; }
 .mgb4 { margin-bottom: 4px; }
@@ -89,19 +107,40 @@
 .mgt48 { margin-top: 48px; }
 .mgt64 { margin-top: 64px; }
 
+/* margin-vertical */
+.mgv2 { margin-bottom: 2px; margin-top: 2px; }
+.mgv4 { margin-bottom: 4px; margin-top: 4px; }
+.mgv8 { margin-bottom: 8px; margin-top: 8px; }
+.mgv16 { margin-bottom: 16px; margin-top: 16px; }
+.mgv32 { margin-bottom: 32px; margin-top: 32px; }
+.mgv48 { margin-bottom: 48px; margin-top: 48px; }
+.mgv64 { margin-bottom: 64px; margin-top: 64px; }
+
 /* margin */
-.mg2 { margin-top: 2px; }
-.mg4 { margin-top: 4px; }
-.mg8 { margin-top: 8px; }
-.mg16 { margin-top: 16px; }
-.mg32 { margin-top: 32px; }
-.mg48 { margin-top: 48px; }
-.mg64 { margin-top: 64px; }
+.mg2 { margin: 2px; }
+.mg4 { margin: 4px; }
+.mg8 { margin: 8px; }
+.mg16 { margin: 16px; }
+.mg32 { margin: 32px; }
+.mg48 { margin: 48px; }
+.mg64 { margin: 64px; }
 
 
 /* Screen Range */
-@media only screen and (min-width: 601px){.right-on-med-and-up{text-align: right }}
-@media only screen and (max-width: 992px){.center-on-med-and-down{text-align: center }}
+@media only screen and (min-width: 601px){
+    .right-on-med-and-up { text-align: right }
+    .login_box {
+        text-align: center;
+        padding: 64px;
+    }
+}
+@media only screen and (max-width: 992px){
+    .center-on-med-and-down { text-align: center }
+    .login_box {
+        text-align: center;
+        padding: 32px;
+    }
+}
 
 .description {
 	white-space: nowrap;
@@ -119,6 +158,10 @@ ul.list-type-none {
 
 a.menu {
 	color: #333333;
+}
+
+.outline {
+    outline: #808080;
 }
 
 /* align */
