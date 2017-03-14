@@ -10,9 +10,9 @@ block content
       li
         .collapsible-header
           i.material-icons filter_drama
-          | #{obj.folder}
+          | #{obj.Folder}
         .collapsible-body
           div.collection
-            each file in obj.files
+            each file in obj.Files
               div.collection-item
-                a(href='/download?where=' + "#{file.path}", target='_self') #{file.name}
+                a(href='/download?where=' + "#{file.Idx}", target='_self') #{file.FileName}

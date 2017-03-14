@@ -5,6 +5,7 @@ var path = require('path');
 var async = require('async');
 
 var EZCrypto = require('./../scripts/EZCrypto');
+var EZDB = require('./../scripts/EZDB');
 
 const folderPath = './private/dataroom/';
 
@@ -98,15 +99,49 @@ function loadFileEachDirectory(folders, callback)
 /* GET home page. */
 router.get('/', function (req, res, next) {
     
-    async.waterfall([
-        loadDirectory
-        , loadFileEachDirectory
-    ], function (err, result) {
-        if (err)
-            return;
+    //async.waterfall([
+    //    loadDirectory
+    //    , loadFileEachDirectory
+    //], function (err, result) {
+    //    if (err)
+    //        return;
 
-        // console.log(result);
-        res.render('dataroom', { title: '자료실', res : result });
+    //    console.log(result);
+    //    res.render('dataroom', { title: '자료실', user: req.user, res : result });
+    //});
+    
+    var sql = 'select Idx, Folder,FileName, DownloadCount from dataroom';
+    EZDB.query(sql, function (err, results) {
+        if (err) throw err;
+        else {
+            
+            var map = new Map();
+            for (var i = 0; i < results.length; i++) {
+                var row = results[i];
+                var key = row['Folder'];
+                if (map.has(key) == false) {
+                    map.set(key, []);
+                }
+
+                var arr = map.get(key);
+                delete row['Folder'];
+                arr.push(row);
+            }
+            
+            var arr = [];
+            for (var key of map.keys()) {
+                var file = {};
+                file['Folder'] = key;
+                file['Files'] = map.get(key);
+                arr.push(file);
+            }
+            
+            res.render('dataroom', {
+                title: '자료실'
+                , user: req.user
+                , res: arr
+            });
+        }
     });
 
     /*
