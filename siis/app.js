@@ -1,8 +1,16 @@
 ﻿
 const cluster = require('cluster');
-const numCPUs = require('os').cpus().length;
+// const numCPUs = require('os').cpus().length;
+const numCPUs = 1;
 
 const express = require('express');
+const session = require('express-session');
+const passport = require('passport');
+const Strategy = require('passport-facebook').Strategy;
+const KakaoStrategy = require('passport-kakao').Strategy;
+
+const config = require('./scripts/Config');
+
 var path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
@@ -14,37 +22,41 @@ const numberOfRowsInPage = 20;
 if (cluster.ismaster) {
 
     for (var i = 0; i < numcpus; i++) {
-		cluster.fork();
-	}
+        cluster.fork();
+    }
 
-	cluster.on('online', function (worker) {
-		console.log('worker %d, online...'
-			, worker.process.pid);
-	});
+    cluster.on('online', function (worker) {
+        console.log('worker %d, online...'
+            , worker.process.pid);
+    });
 
-	cluster.on('listening', function (worker, address) {
-		console.log("a worker is now connected to " + address.address + ":" + address.port);
-	});
+    cluster.on('listening', function (worker, address) {
+        console.log("a worker is now connected to " + address.address + ":" + address.port);
+    });
 
-	cluster.on('exit', function (worker, code, signal) {
-		console.log('worker %d died (%s). restarting...'
-			, worker.process.pid
-			, signal || code);
+    cluster.on('exit', function (worker, code, signal) {
+        console.log('worker %d died (%s). restarting...'
+            , worker.process.pid
+            , signal || code);
 
-		// cluster.fork();
+        // cluster.fork();
     });
 
 } else {
 
-	fs = require('fs');
+    fs = require('fs');
+
+    var app = express();
+
+    console.log(process.env);
+    console.log('PORT: ' + process.env.PORT);
+    console.log(process.argv);
 	
-	var app = express();
-	
-	// view engine setup
-	app.set('views', path.join(__dirname, 'views'));
-	app.set('view engine', 'jade');
-	// app.engine('html', require('ejs').renderFile);
-	// app.set('view engine', 'html');
+    // view engine setup
+    app.set('views', path.join(__dirname, 'views'));
+    app.set('view engine', 'jade');
+    // app.engine('html', require('ejs').renderFile);
+    // app.set('view engine', 'html');
 	
 	/*
 	app.set('view engine', 'md');
@@ -59,15 +71,49 @@ if (cluster.ismaster) {
 	});
 	*/
 
-	// uncomment after placing your favicon in /public
-	// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-	app.use(logger('dev'));
-	app.use(bodyParser.json());
-	app.use(bodyParser.urlencoded({ extended: false }));
-	app.use(cookieParser());
-	app.use(express.static(path.join(__dirname, 'public')));
+    // uncomment after placing your favicon in /public
+    app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+    app.use(logger('dev'));
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: false }));
+    app.use(cookieParser());
+    app.use(express.static(path.join(__dirname, 'public')));
+    app.use(session({
+        //key: 'key'
+        secret: config.sessionKey
+        , resave: true             // don't save session if unmodified
+        , saveUninitialized: true   // don't create session until something stored
+        , cookie: {
+            maxAge: 1000 * 60 * 60
+        }
+    }));
+
+    // facebook
+    passport.use(new Strategy({
+        clientID: config.facebook.clientID,
+        clientSecret: config.facebook.clientSecret,
+        callbackURL: config.facebook.callbackURL,
+        profileFields: ['id', 'displayName', 'photos', 'email']
+    }, function (accessToken, refreshToken, profile, cb) {
+        profile.picture = profile.photos ? profile.photos[0].value : 'images/user_male-128.png';
+        return cb(null, profile);
+    }));
+
+    // kakao
+    passport.use(new KakaoStrategy({
+        clientID: config.kakao.clientID,
+        callbackURL: config.kakao.callbackURL    
+    }, function (accessToken, refreshToken, profile, cb) {
+        console.log('kakao: ' + profile);
+        profile['picture'] = profile._json.profile_image;
+        console.log(profile.picture);
+        return cb(null, profile);
+    }));
+
+    app.use(passport.initialize());
+    app.use(passport.session());
 	
-    app.use('/', require('./routes/gate'));
+    app.use('/', require('./routes/index'));
     app.use('/index', require('./routes/index'));
     app.use('/users', require('./routes/users'));
     app.use('/gate', require('./routes/gate'));
@@ -80,7 +126,50 @@ if (cluster.ismaster) {
     app.use('/gl', require('./routes/gl'));
     app.use('/ti', require('./routes/ti'));
     app.use('/write', require('./routes/write'));
-	
+    
+    passport.serializeUser(function (user, done) {
+        console.log(user);
+        done(null, user);
+    });
+
+    passport.deserializeUser(function (obj, done) {
+        done(null, obj);
+    });
+
+    app.get('/login', function (req, res) {
+        res.render('login');
+    });
+
+    app.get('/logout', function (req, res) {
+        req.logout();
+        res.redirect('/');
+    }); 
+    
+    // facebook
+    app.get('/login/facebook', passport.authenticate('facebook', config.facebookPermissions));
+
+    app.get('/login/facebook/return',
+        passport.authenticate('facebook', config.facebookPermissions),
+        function (req, res) {
+            console.log(req.query.code);
+            res.redirect('/');
+        });
+
+    // kakao
+    app.get('/auth/kakao', passport.authenticate('kakao', {
+        failureRedirect: '/login'
+    }), function (req, res) {
+        console.log('auth/kakao');
+        res.redirect('/');
+    });
+
+    app.get('/oauth', passport.authenticate('kakao', {
+        failureRedirect: '#!/login'
+    }), function (req, res) {
+        console.log('oauth');
+        res.redirect('/');
+    });
+    
 	// catch 404 and forward to error handler
 	app.use(function (req, res, next) {
 		var err = new Error('Not Found');

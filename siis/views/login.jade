@@ -1,0 +1,33 @@
+﻿doctype html
+html
+  head
+    title= title
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='https://code.jquery.com/jquery-2.1.1.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js')
+  body
+    main.container
+      .login_box
+        a(href='/')
+          img(src='images/ic/logo.png', width='620px', height='154px')
+      input.pdt8.pdr32.pdb8.pdl16(type='text', placeholder='아이디', name='id')
+      input.pdt8.pdr32.pdb8.pdl16(type='text', placeholder='비밀번호', name='pw')
+      div.mgt8.mgb16
+        .btn-large.siis_color.fill_parent_width 로그인
+      div.divider.mg32
+      .center-align
+        ul.list-type-none
+          li.horizontal.mgr16
+            a.siis-text(href='/login') 아이디 찾기
+          li.horizontal.mgr16
+            a.siis-text(href='/login') 비밀번호 찾기
+          li.horizontal.mgr16
+            a.siis-text(href='/login') 회원가입
+      .center-align
+        a.mgr16(href="/login/facebook")
+          img(src='images/ic/facebook-128.png', width='68px', height='68px')
+        a.mgr16(href="/auth/kakao")
+          img(src='https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png', width='68px', height='68px')

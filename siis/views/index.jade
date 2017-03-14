@@ -5,6 +5,20 @@ block content
     $(document).ready(function(){
       $("#notice").addClass('active');
     });
+  - if (!user) {
+      .right-align
+        .pdt8.pdr8
+          a.siis-text(href='/login') 로그인
+  - } else {
+      ul.list-type-none
+        li.horizontal.mgr32
+          p
+          | Hello, #{user.displayName}
+        li.horizontal.mgr32.align_right
+          img(src='#{user.picture}')
+        li.horizontal.mgr32.align_right
+          a.btn-medium(href='/logout') Logout
+  - }
   div.collection
     each file, i in list
       if i <= numberOfRowsInPage
@@ -28,5 +42,7 @@ block content
         li
           a(href='/index?page=' + i) #{i}
     - }
+  - if (user) {
   a.siis.btn(href='/write') 글쓰기
     i.material-icons.left mode_edit
+  - }
