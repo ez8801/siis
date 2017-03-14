@@ -3,8 +3,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-    console.log('calendar');
-    res.render('calendar');
+    res.render('calendar', { user: req.user });
 });
 
 module.exports = router;
