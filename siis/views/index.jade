@@ -10,14 +10,13 @@ block content
         .pdt8.pdr8
           a.siis-text(href='/login') 로그인
   - } else {
-      ul.list-type-none
-        li.horizontal.mgr32
-          p
-          | Hello, #{user.displayName}
-        li.horizontal.mgr32.align_right
-          img(src='#{user.picture}')
-        li.horizontal.mgr32.align_right
-          a.btn-medium(href='/logout') Logout
+      .right-align
+        .pdt8.pdr8
+          a.siis-text(href='/logout') 로그아웃  
+      //ul.list-type-none.right-align
+        //li.horizontal
+          // #{user.displayName}
+          // img.pdl8(src='#{user.picture}')          
   - }
   div.collection
     each file, i in list
