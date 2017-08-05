@@ -4,19 +4,45 @@ var router = express.Router();
 var path = require('path');
 var dateUtils = require('date-utils');
 
+var EZDB = require('./../scripts/EZDB');
+
+function GetUserName(user) {
+    var username = '';
+    if (user.provider == 'kakao') {
+        username = user.username;
+    } else if (user.provider == 'facebook') {
+        username = user.displayName;
+    }
+    return username;
+}
+
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-    res.render('write');
+    res.render('write', {
+        username: GetUserName(req.user)
+    });
 });
 
 router.post('/', function (req, res, next) {
 
-    console.log(req.body);
-    var params = req.body;
-    console.log('Title: ' + params.title);
-    console.log('Content: ' + params.content);
-    res.redirect('/');
+    var params = req.body;    
+    var date = new Date();
+    var dateName = date.toFormat('YYYY-MM-DD');
 
+    var sql = 'INSERT INTO board set Author=?, Title=?, Contents=?, CreatedAt=?, UpdatedAt=?';
+    EZDB.query(sql
+        , [params.author
+        , params.title
+        , params.content
+        , dateName
+        , dateName]
+        , function (err, results) {
+        if (err) throw err;
+        else {
+            res.redirect('/');
+        }
+    });
+    
     // var fileName = where.substring(0, where.length - 3);
     
     /*

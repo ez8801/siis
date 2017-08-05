@@ -15,7 +15,7 @@ function loadDirectory(callback)
     // var parentDir = path.dirname(module.parent.filename);    
     // var finalPath = parentDir + '\\public\\';
 
-    fs.readdir(folderPath, function (err, files)
+    fs.readdir(folderPath, 'utf8', function (err, files)
     {
         if (err)
         {
@@ -49,6 +49,8 @@ function loadFileEachDirectory(folders, callback)
         callback('dataroom::loadFileEachDirectory(), ArgumentNullException');
         return;
     }
+    
+    var fs = require('fs');
 
     async.map(folders, fs.readdir, function (err, results)
     {
@@ -63,6 +65,7 @@ function loadFileEachDirectory(folders, callback)
             }
             
             var res = [];
+            var csv = 'hashValue,folder,name\n';
 
             for (var i = 0; i < folders.length; i++)
             {
@@ -79,9 +82,18 @@ function loadFileEachDirectory(folders, callback)
                     var file = {};
                     // file['path'] = folders[i] + '/' + results[i][j];
                     file['path'] = EZCrypto.encrypt(folders[i] + '/' + results[i][j]);
-                    // console.log(file['path']);
+                    console.log(file['path']);
+                    csv += file['path'];
+                    csv += ',';
+
+                    csv += folders[i];
+                    csv += ',';
 
                     file['name'] = results[i][j];
+
+                    csv += file['name'];
+                    csv += '\n';
+                    
                     arr.push(file);
                 }
 
@@ -91,6 +103,7 @@ function loadFileEachDirectory(folders, callback)
                 res.push(obj);
             }
 
+            fs.writeFileSync('dataroom.txt', Buffer.from(csv, 'utf8'), 'utf8');
             callback(null, res);
         }
     });
@@ -103,18 +116,14 @@ router.get('/', function (req, res, next) {
     //    loadDirectory
     //    , loadFileEachDirectory
     //], function (err, result) {
-    //    if (err)
-    //        return;
-
-    //    console.log(result);
-    //    res.render('dataroom', { title: '자료실', user: req.user, res : result });
+        
     //});
     
     var sql = 'select Idx, Folder,FileName, DownloadCount from dataroom';
     EZDB.query(sql, function (err, results) {
         if (err) throw err;
         else {
-            
+          
             var map = new Map();
             for (var i = 0; i < results.length; i++) {
                 var row = results[i];
@@ -127,7 +136,7 @@ router.get('/', function (req, res, next) {
                 delete row['Folder'];
                 arr.push(row);
             }
-            
+          
             var arr = [];
             for (var key of map.keys()) {
                 var file = {};
@@ -135,7 +144,7 @@ router.get('/', function (req, res, next) {
                 file['Files'] = map.get(key);
                 arr.push(file);
             }
-            
+          
             res.render('dataroom', {
                 title: '자료실'
                 , user: req.user

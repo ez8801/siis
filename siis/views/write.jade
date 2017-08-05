@@ -4,6 +4,7 @@ block content
   script(src='scripts/write.js')
   form#contentForm(action='/write', method='POST')
     input#title.validate(placeholder='Title', type='text', data-length="50", name='title')
+    input#author.validate(placeholder='Author', type='text', data-length="50", name='author', value='#{username}') 
     ul.collapsible(data-collapsible='expandable')
       li
         .collapsible-header.transparent

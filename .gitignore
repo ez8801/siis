@@ -1,5 +1,5 @@
 # Dependency directories
-siis/node_modules/
+Client/Library/
 
 # Typescript v1 declaration files
 siis/typings/

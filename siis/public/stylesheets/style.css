@@ -168,6 +168,7 @@ a.menu {
 .align_center { text-align: center; }
 .align_right { text-align: right; }
 .align_left { text-align: left; }
+.align_top { text-align: start; }
 .vertical_align_middle { vertical-align: middle; }
 
 /* color */
@@ -227,11 +228,11 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-  }
+}
 
-  main {
+main {
     flex: 1 0 auto;
-  }
+}
 
 /*
 div { display:inline; }

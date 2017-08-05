@@ -24,7 +24,7 @@ util.inherits(EZDB, events);
 
 EZDB.pool = mysql.createPool(config);
 
-EZDB.query = function(query, finalCallback) {
+EZDB.query = function(sql, finalCallback) {
     async.waterfall([
         function (callback) {
             EZDB.pool.getConnection(function (err, connection) {
@@ -42,7 +42,33 @@ EZDB.query = function(query, finalCallback) {
                 if (err) callback(err);
                 else callback(null, results);
             };
-            connection.query(query, onFinishQuery);
+            connection.query(sql, onFinishQuery);
+        }
+    ], function (err, results) {
+        if (err) finalCallback(err);
+        else finalCallback(null, results);
+    });
+};
+
+EZDB.query = function (sql, values, finalCallback) {
+    async.waterfall([
+        function (callback) {
+            EZDB.pool.getConnection(function (err, connection) {
+                if (err) {
+                    connection.release();
+                    callback(err);
+                }
+                else callback(null, connection);
+            });
+        },
+        function (connection, callback) {
+            var onFinishQuery = function (err, results) {
+                connection.release();
+
+                if (err) callback(err);
+                else callback(null, results);
+            };
+            connection.query(sql, values, onFinishQuery);
         }
     ], function (err, results) {
         if (err) finalCallback(err);
